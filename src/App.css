@@ -26,3 +26,38 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+.cinema, .movies{
+  display: flex;
+  justify-content: row;
+  flex-wrap: wrap;
+}
+
+.movieWrap{
+  margin: 10px;
+  width: 100%;
+}
+
+.movieCard{
+  margin: 10px;
+}
+
+.movieCard{
+  margin: 10px;
+}
+.content, .movie-content, li{
+  text-align: left;
+  list-style-type: none;
+}
+
+ul.movie-content, ul, content{
+  margin: 0
+}
+
+.addMovieIcon {
+  position: fixed;
+  display: block;
+  width: 150px;
+  z-index: 1;
+  right: 0;
+  bottom: 10px;
+}
