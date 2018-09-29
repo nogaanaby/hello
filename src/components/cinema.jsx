@@ -13,7 +13,7 @@ class Cinema extends Component {
   constructor() {
     super();
     this.state = {
-      movieTitles: [ 'inception', 'princess', 'v for vendetta', 'sisters', 'The Great Gatsby', 'The Visit'],
+      movieTitles: [ 'inception', 'lala', 'v for vendetta', 'sisters', 'The Great Gatsby', 'The Visit'],
       CinemaWidth: this.getCinemaWidth(),
       movieBoxWidth: this.getCinemaWidth()/ (Math.ceil(this.getCinemaWidth() / 400)),
       popup: 'non',
@@ -126,6 +126,7 @@ class Cinema extends Component {
   render() {
     return (
       <div className="cinema">
+        <div className="movies">
           {
             this.props.movies.map((movie, index)=>{
               return <div key={index}>
@@ -153,7 +154,8 @@ class Cinema extends Component {
                 />
               </div>
             })
-          }      
+          }
+        </div>
         <Popup
           active={this.props.error}
           title='massage'

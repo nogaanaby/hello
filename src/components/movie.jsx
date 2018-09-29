@@ -55,21 +55,13 @@ class Movie extends Component {
             </figure>
           </div>
           <div className="card-content">
-            <div className="media">
-              <div className="media-left">
-                <figure className="image is-48x48">
-                  <img src={noimage} alt="Placeholder image"></img>
-                </figure>
-              </div>
               <div className="media-content">
-                <p className="title is-4">{this.state.titleShortcut}</p>
+                <p className="title is-5">{this.props.movie.Title}</p>
                 <p className="subtitle is-6">@{this.props.movie.Year}</p>
               </div>
-            </div>
-
             <div className="movie-content">
               <ul className="movie-details">
-                <li><b>Director: </b>{this.props.movie.Director}</li>
+                <li className="is-small"><b>Director: </b>{this.props.movie.Director}</li>
                 <li><b>Runtime: </b>{this.props.movie.Runtime}</li>
                 <li><b>Genre: </b>{this.props.movie.Genre}</li>
               </ul>

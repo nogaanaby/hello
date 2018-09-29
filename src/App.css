@@ -30,6 +30,7 @@
   display: flex;
   justify-content: row;
   flex-wrap: wrap;
+  background-color: #222;
 }
 
 .movieWrap{
