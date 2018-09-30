@@ -21,6 +21,8 @@ class Cinema extends Component {
     };
   }
 
+  /****************   GENERAL   *************/
+
   calcMovieBoxWidth = () => {
     this.setState({CinemaWidth: this.getCinemaWidth()});
     const {CinemaWidth} = this.state
@@ -55,26 +57,6 @@ class Cinema extends Component {
     window.removeEventListener('resize', this.calcMovieBoxWidth)
   }
 
-  openAdding = () => {
-    this.setState({popup: 'addMovie'})
-  }
-
-  addMovie = (title) => {
-    this.props.fetchMovie(title)
-    if (this.props.error === '') {
-      this.closePopup()
-    }
-  }
-
-  handleDelete = (title) => {
-    this.props.fetchError(`Are you sure you want to delete ${title}?`)
-    this.setState({deleteMovieByTitle: title})
-  }
-
-  handleEdit = (title) => {
-    this.setState({popup: title + '_edit'})
-  }
-
   closePopup = () => {
     this.setState({popup: 'non'})
   }
@@ -83,7 +65,14 @@ class Cinema extends Component {
     this.props.fetchError('')
   }
 
-  submitErrorMessage = () => {
+  /****************   DELETE   *************/
+
+  confirmDelete = (title) => {
+    this.props.fetchError(`Are you sure you want to delete ${title}?`)
+    this.setState({deleteMovieByTitle: title})
+  }
+
+  submitErrorOrDelete = () => {
     this.props.fetchError('')
     if(this.state.deleteMovieByTitle !== '') {
       this.props.deleteMovie(this.state.deleteMovieByTitle)
@@ -91,7 +80,13 @@ class Cinema extends Component {
     }
   }
 
-  handleSubmit = (movieID, valuesArray, moviePoster) => {
+  /****************   EDIT   *************/
+
+  handleEdit = (title) => {
+    this.setState({popup: title + '_edit'})
+  }
+
+  handleEditSubmit = (movieID, valuesArray, moviePoster) => {
     let newMovie = {
       imdbID: movieID,
       Title: '',
@@ -107,6 +102,22 @@ class Cinema extends Component {
     this.props.editMovie(movieID, newMovie)
     this.closePopup()
   }
+
+  /****************   ADD MOVIE   *************/
+
+  openAdding = () => {
+    this.setState({popup: 'addMovie'})
+  }
+
+  addMovie = (title) => {
+    this.props.fetchMovie(title)
+    if (this.props.error === '') {
+      this.closePopup()
+    }
+  }
+
+/****************   EXPAND MOVIE   *************/
+
 
   handleExpand = (title) => {
     this.setState({popup: title + '_expand'})
@@ -133,7 +144,7 @@ class Cinema extends Component {
                 <Movie
                 movieBoxWidth={this.state.movieBoxWidth}
                 movie={movie}
-                onDelete={this.handleDelete}
+                onDelete={this.confirmDelete}
                 onEdit={this.handleEdit}
                 onExpand={this.handleExpand}
                 presentType="mini"
@@ -144,7 +155,7 @@ class Cinema extends Component {
                 movie={movie}
                 active={this.state.popup === movie.Title + '_edit'}
                 onClose={this.closePopup}
-                onSubmit={this.handleSubmit}
+                onSubmit={this.handleEditSubmit}
                 movieTitles={this.state.movieTitles}/>
                 <Expand
                 movie={movie}
@@ -160,7 +171,7 @@ class Cinema extends Component {
           active={this.props.error}
           title='massage'
           onClose={this.closeError}
-          onSubmit={this.submitErrorMessage}
+          onSubmit={this.submitErrorOrDelete}
           submitButtonText='OK'>
           <p>{this.props.error}</p>
         </Popup>

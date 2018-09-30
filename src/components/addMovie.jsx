@@ -10,7 +10,7 @@ class AddMovie extends Component {
   }
 
   save = () => {
-    if(this.props.movieTitles.find((title)=> title === this.state.chosenTitle)){
+    if(this.props.movieTitles.find((title)=> title.toLowerCase() === this.state.chosenTitle.toLowerCase())){
       this.setState({error: 'This Title Already Exist'})
     } else {
       this.props.onAddMovie(this.state.chosenTitle)

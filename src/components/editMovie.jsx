@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import Popup from './popup'
+import Input from './input'
+import moment from 'moment'
+
 class EditMovie extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      //values: this.getValues(),
       values: [
         {key: 'Title', value: this.props.movie.Title, error: ''},
         {key: 'Year', value: this.props.movie.Year, error: ''},
@@ -11,61 +15,58 @@ class EditMovie extends Component {
         {key: 'Genre', value: this.props.movie.Genre, error: ''},
         {key: 'Director', value: this.props.movie.Director, error: ''}
       ],
-      onAreYouSureMessage: false
+      onConfirmMessage: false,
+      isErrors: false
     };
   }
 
-  valid = () => {
-    let noErrors = true
-    const temp = [...this.state.values]
-    temp.forEach((attr)=>{
-      if(attr.value.length === 0) {
-        attr.error = 'this field must be fild with value'
-        noErrors = false
-      } else {
-        attr.error = ''
-      }
+  getValues = () => {
+    const values = []
+    const attr = {}
+    Object.keys(this.props.movie).forEach((key)=>{
+      attr.key = key
+      attr.value = this.props.movie[key]
+      attr.error = ''
+      values.push(attr)
     })
-    this.setState({values: temp});
-    return noErrors
+    return values
   }
 
-  titleExist = () => {
-    const originTitle = this.props.movie.Title
-    const chosenTitle = this.state.values[0].value
-    if(originTitle !== chosenTitle && this.props.movieTitles.find((movieTitle)=> movieTitle.toLowerCase() === chosenTitle.toLowerCase())){
-      this.state.values[0].error = 'This Title Already Exist'
-      return true
+  componentDidUpdate(prevProps) {
+    if (this.props.movie.imdbID !== prevProps.movie.imdbID) {
+      const temp = [...this.state.values]
+      Object.keys(this.props.movie).forEach((key)=>{
+        temp.forEach((attr) => {
+          if(key === attr.key) {
+            attr.value = this.props.movie[key]
+          }
+        })
+      })
+      this.setState({values: temp});      
     }
-    return false
   }
 
   handleSubmit = () => {
-    if(this.valid() && !this.titleExist()) {
+    if(!this.state.isErrors) {
       this.props.onSubmit(this.props.movie.imdbID, this.state.values, this.props.movie.Poster)
     }
   }
 
-  handleChange = (event, key) => {
-    const temp = [...this.state.values]
-    temp.forEach((attr)=>{
-      if(attr.key === key) {
-        attr.value = event.target.value
-      }
-    })
-    this.setState({values: temp});
-  }
-
-  closeEdit = () => {
-    this.setState({onAreYouSureMessage: true});
-  }
-
-  closeAreYouSure = () => {
-    this.setState({onAreYouSureMessage: false});
+  handleChange = (error, key, value) => {
+    if (error !== '') {
+      this.setState({isErrors: true});
+    } else {
+      const temp = [...this.state.values]
+      temp.map((attr)=>{
+        if(attr.key === key)
+        attr.value = value
+      })
+      this.setState({isErrors: false, values: temp});
+    }
   }
 
   closeAll = () => {
-    this.closeAreYouSure()
+    this.setState({onConfirmMessage: false});
     this.props.onClose()
   }
   render() {
@@ -74,32 +75,24 @@ class EditMovie extends Component {
           <Popup
             active={this.props.active}
             title={this.props.movie.Title}
-            onClose={this.closeEdit}
+            onClose={()=>{this.setState({onConfirmMessage: true})}}
             onSubmit={this.handleSubmit}
             submitButtonText='save changes'>
           {
-          this.state.values.map( (attr, index) => {
-            return <div className="field is-horizontal" key={attr.key}>
-              <div className="field-label is-normal">
-                <label className="label">{attr.key}</label>
-              </div>
-              <div className="field-body">
-                <div className="field">
-                  <p className="control is-expanded">
-                    <input className="input" type="text" value={attr.value}
-                      onChange={(e) => this.handleChange(e, attr.key)}/>
-                  </p>
-                  <p className="help is-danger">{attr.error}</p>
-                </div>
-              </div>
-            </div>
-          })
+            this.state.values.map( (attr) => {
+              return <Input
+                key={attr.key}
+                lable={attr.key}
+                value={attr.value}
+                movieTitles={this.props.movieTitles}
+                onChange={this.handleChange}/>
+            })
           }
           </Popup>
           <Popup
-            active={this.state.onAreYouSureMessage}
+            active={this.state.onConfirmMessage}
             title='message'
-            onClose={this.closeAreYouSure}
+            onClose={()=>{this.setState({onConfirmMessage: false})}}
             onSubmit={this.closeAll}
             submitButtonText='yes'>
           <p>your changes will not be save, are you sure you want to discard?</p>
