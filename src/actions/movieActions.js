@@ -9,9 +9,18 @@ export const titlePresentFormat = (title) => {
   const titleWordsArray = title.toLowerCase().split(" ")
 
   titleWordsArray.forEach((word) => {
-    arrangedTitle = arrangedTitle + ' ' + removeNonStrings(word).charAt(0).toUpperCase() + removeNonStrings(word).slice(1)
+    arrangedTitle = arrangedTitle + removeNonStrings(word).charAt(0).toUpperCase() + removeNonStrings(word).slice(1) + ' '
   })
-  return arrangedTitle
+  return arrangedTitle.trim()
+}
+
+export const runtimePresentFormat = (runtime) => {
+  if(runtime.match(/[min]/g)) {
+    return runtime
+  } else {
+    return runtime + ' min'
+  }
+
 }
 
 export const fetchMovie = (title) => dispatch => {
@@ -24,7 +33,7 @@ export const fetchMovie = (title) => dispatch => {
       } else {
         dispatch({ type: ERROR, payload: movie.Error})
       }
-    })
+    }).catch(error => console.log(error))
 }
 
 export const deleteMovie = (title) => dispatch => {
@@ -36,6 +45,7 @@ export const deleteMovie = (title) => dispatch => {
 
 export const editMovie = (id ,newMovie) => dispatch => {
   newMovie.Title = titlePresentFormat(newMovie.Title)
+  newMovie.Runtime = runtimePresentFormat(newMovie.Runtime)
   dispatch({
     type: EDIT_MOVIE,
     payload: {id, newMovie}

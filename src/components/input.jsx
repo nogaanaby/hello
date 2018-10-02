@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import moment from 'moment'
 class Input extends Component {
   constructor(props) {
     super(props);
@@ -11,56 +10,67 @@ class Input extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.value !== prevProps.value) {
-      this.setState({value: this.props.value});      
+      this.setState({value: this.props.value});
     }
   }
 
-  checkDateValidation = (value) => {
-    if(this.props.lable === 'Year') {
-      const chosenYear = value
-      const date = moment(chosenYear)
-      if(!date.isValid()) {
-        return 'Please Type Valid Date'
+  checkRuntimeValidation = (value) => {
+    if(this.props.label === 'Runtime') {
+      if(value.match(/[^0-9]/g)) {
+        return 'Please Type Valid Runtime, integers only'
+      } else if(value.length > 4){
+        return `Movie's runtime can't be that long`
       }
     }
-    return ''
+    return false
+  }
+
+  checkDateValidation = (value) => {
+    if(this.props.label === 'Year') {
+      const year = value
+      if(year.match(/[^0-9]/g) || 
+          parseInt(year) < 1900 || 
+          parseInt(year) > 2018 || 
+          year.length > 4) {
+        return 'Please Type Valid Year between 1900-2018'
+      }
+    }
+    return false
   }
 
   checkTextValidation = (value) => {
     if(value.length === 0) {
-      return 'this field can not be empty'
+      return `this field can't be empty`
     }
-    return ''
+    return false
   }
 
   checkTitleValidation = (value) => {
-    if(this.props.lable === 'Title') {
+    if(this.props.label === 'Title') {
       const originTitle = this.props.value
       const chosenTitle = value
       if(originTitle !== chosenTitle && this.props.movieTitles.find((movieTitle)=> movieTitle.toLowerCase() === chosenTitle.toLowerCase())){
         return 'This Title Already Exist'
       }
     }
-    return ''
+    return false
   }
 
   checkForErrors = (value) => {
-    if(this.checkTextValidation(value) !== '') {
-      return this.checkTextValidation(value)
-    } else if (this.checkDateValidation(value) !== '')  {
-      return this.checkDateValidation(value)
-    } else if (this.checkTitleValidation(value) !== '') {
-      return this.checkTitleValidation(value)
-    }
-    return ''
+    const textError = this.checkTextValidation(value)
+    const yearError = this.checkDateValidation(value)
+    const titleError = this.checkTitleValidation(value)
+    const runtimeError = this.checkRuntimeValidation(value)
+
+    return (textError || yearError || titleError || runtimeError)
   }
 
 
   handleChange = (event) => {
     const inputVal = event.target.value
     this.setState({value: inputVal});
-    this.props.onChange(this.checkForErrors(inputVal), this.props.lable, inputVal)
     this.setState({error: this.checkForErrors(inputVal)})
+    this.props.onChange(this.checkForErrors(inputVal), this.props.label, inputVal)
   }
 
   render() {
@@ -68,7 +78,7 @@ class Input extends Component {
       <div>
         <div className="field is-horizontal">
           <div className="field-label is-normal">
-            <label className="label">{this.props.lable}</label>
+            <label className="label">{this.props.label}</label>
           </div>
           <div className="field-body">
             <div className="field">

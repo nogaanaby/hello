@@ -57,13 +57,13 @@ class Movie extends Component {
           <div className="card-content">
               <div className="media-content">
                 <p className="title is-5">{this.props.movie.Title}</p>
-                <p className="subtitle is-6">@{this.props.movie.Year}</p>
+                <p className="subtitle is-6"><b>Year: </b>{this.props.movie.Year}</p>
               </div>
             <div className="movie-content">
               <ul className="movie-details">
                 <li className="is-small"><b>Director: </b>{this.props.movie.Director}</li>
-                <li><b>Runtime: </b>{this.props.movie.Runtime}</li>
-                <li><b>Genre: </b>{this.props.movie.Genre}</li>
+                <li className="is-small"><b>Runtime: </b>{this.props.movie.Runtime}</li>
+                <li className="is-small"><b>Genre: </b>{this.props.movie.Genre}</li>
               </ul>
             </div>
           </div>

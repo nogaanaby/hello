@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #222;
 }
 
 .App-logo {
@@ -30,7 +31,6 @@
   display: flex;
   justify-content: row;
   flex-wrap: wrap;
-  background-color: #222;
 }
 
 .movieWrap{
@@ -61,4 +61,35 @@ ul.movie-content, ul, content{
   z-index: 1;
   right: 0;
   bottom: 10px;
+}
+
+p.title.is-5{
+  font-size: 1.1rem;
+}
+
+p.subtitle.is-6{
+  font-size: 0.9rem;
+}
+
+li.is-small{
+  font-size: 0.8rem;
+}
+
+.hide{
+  display: none;
+}
+
+.fa-circle-notch{
+  position: fixed;
+  z-index: 1;
+  right: 50%;
+  top: 50%;
+}
+
+.iconTurkiz{
+  color:#00ADC1;
+}
+
+.iconTurkiz:hover{
+  color:#008a99;
 }

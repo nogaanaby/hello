@@ -8,6 +8,7 @@ import Popup from './popup';
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import { fetchMovie, deleteMovie, editMovie, fetchError } from '../actions/movieActions.js'
+import '../App.css';
 
 class Cinema extends Component {
   constructor() {
@@ -48,7 +49,7 @@ class Cinema extends Component {
   componentDidMount() {
     this.calcMovieBoxWidth()
     window.addEventListener('resize', this.calcMovieBoxWidth)
-    this.state.movieTitles.map((title)=>{
+    this.state.movieTitles.forEach((title)=>{
       this.props.fetchMovie(title)
     })
   }
@@ -111,7 +112,7 @@ class Cinema extends Component {
 
   addMovie = (title) => {
     this.props.fetchMovie(title)
-    if (this.props.error === '') {
+    if(this.props.error === '') {
       this.closePopup()
     }
   }
@@ -148,9 +149,9 @@ class Cinema extends Component {
                 onEdit={this.handleEdit}
                 onExpand={this.handleExpand}
                 presentType="mini"
-                editBText={<i className="far fa-edit"></i>}
-                expandBText={<i className="fas fa-expand"></i>}
-                deleteBText={<i className="fas fa-trash-alt"></i>}/>
+                editBText={<i className="far fa-edit iconTurkiz"></i>}
+                expandBText={<i className="fas fa-expand iconTurkiz"></i>}
+                deleteBText={<i className="fas fa-trash-alt iconTurkiz"></i>}/>
                 <EditMovie
                 movie={movie}
                 active={this.state.popup === movie.Title + '_edit'}
@@ -176,7 +177,7 @@ class Cinema extends Component {
           <p>{this.props.error}</p>
         </Popup>
         <a className="addMovieIcon">
-          <img className="addMovieIcon" 
+          <img className="addMovieIcon" alt="add movie"
           src={addMovieIcon}
           onClick={this.openAdding}/>
         </a>
@@ -184,7 +185,8 @@ class Cinema extends Component {
           active={this.state.popup === 'addMovie'}
           movieTitles={this.state.movieTitles}
           onAddMovie={this.addMovie}
-          onClose={this.closePopup}/>
+          onClose={this.closePopup}
+        />
       </div>
     );
   }

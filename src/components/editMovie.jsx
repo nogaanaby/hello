@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Popup from './popup'
 import Input from './input'
-import moment from 'moment'
 
 class EditMovie extends Component {
   constructor(props) {
@@ -53,15 +52,32 @@ class EditMovie extends Component {
   }
 
   handleChange = (error, key, value) => {
-    if (error !== '') {
-      this.setState({isErrors: true});
-    } else {
-      const temp = [...this.state.values]
-      temp.map((attr)=>{
+    const temp = [...this.state.values]
+      temp.forEach((attr) => {
         if(attr.key === key)
         attr.value = value
       })
-      this.setState({isErrors: false, values: temp});
+    this.setState({values: temp});
+
+    if (!error) {
+      this.setState({isErrors: false});
+    } else {
+      this.setState({isErrors: true});
+    }
+  }
+
+  closeEdit = () => {
+    let userHadChanges = false
+    Object.keys(this.props.movie).forEach((key)=>{
+      this.state.values.forEach(attr => {
+        if (attr.key === key && attr.value !== this.props.movie[key]) {
+          this.setState({onConfirmMessage: true});
+          userHadChanges = true
+        }
+      })
+    })
+    if(!userHadChanges) {
+      this.props.onClose()
     }
   }
 
@@ -75,14 +91,14 @@ class EditMovie extends Component {
           <Popup
             active={this.props.active}
             title={this.props.movie.Title}
-            onClose={()=>{this.setState({onConfirmMessage: true})}}
+            onClose={this.closeEdit}
             onSubmit={this.handleSubmit}
             submitButtonText='save changes'>
           {
             this.state.values.map( (attr) => {
               return <Input
                 key={attr.key}
-                lable={attr.key}
+                label={attr.key}
                 value={attr.value}
                 movieTitles={this.props.movieTitles}
                 onChange={this.handleChange}/>
