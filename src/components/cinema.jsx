@@ -109,6 +109,14 @@ class Cinema extends Component {
     this.closePopup()
   }
 
+  checkTitleValidation = (value) => {
+    if(this.props.movies.find((movie)=> movie.Title.trim().toLowerCase() === value.trim().toLowerCase())){
+      return 'This Title Already Exist'
+    } else {
+      return false
+    }
+  }
+
   /****************   ADD MOVIE   *************/
 
   openAdding = () => {
@@ -143,7 +151,8 @@ class Cinema extends Component {
                 active={this.state.popup === movie.Title + '_edit'}
                 onClose={this.closePopup}
                 onSubmit={this.handleEditSubmit}
-                movieTitles={this.state.movieTitles}/>
+                movieTitles={this.state.movieTitles}
+                checkTitle={this.checkTitleValidation}/>
               </div>
             })
           }
@@ -166,6 +175,7 @@ class Cinema extends Component {
           movieTitles={this.state.movieTitles}
           onAddMovie={this.addMovie}
           onClose={this.closePopup}
+          checkTitle={this.checkTitleValidation}
         />
         <LoadSpinner
           active={this.state.popup === 'spinner'}/>

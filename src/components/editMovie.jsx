@@ -101,7 +101,8 @@ class EditMovie extends Component {
                 label={attr.key}
                 value={attr.value}
                 movieTitles={this.props.movieTitles}
-                onChange={this.handleChange}/>
+                onChange={this.handleChange}
+                checkTitle={this.props.checkTitle}/>
             })
           }
           </Popup>

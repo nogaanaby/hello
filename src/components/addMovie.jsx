@@ -10,16 +10,20 @@ class AddMovie extends Component {
   }
 
   save = () => {
-    if(this.props.movieTitles.find((title)=> title.toLowerCase() === this.state.chosenTitle.toLowerCase())){
-      this.setState({error: 'This Title Already Exist'})
-    } else {
+    if(this.state.chosenTitle === ''){
+      this.setState({error: `This field can't stey empty`})
+    } else if(this.state.error === ''){
       this.props.onAddMovie(this.state.chosenTitle)
       this.setState({chosenTitle: ''})
     }
   }
 
   handleChange = (event) => {
+    this.setState({error: ''});
     this.setState({chosenTitle: event.target.value});
+    if(this.props.checkTitle(event.target.value) === 'This Title Already Exist'){
+      this.setState({error: 'This Title Already Exist'})
+    }
   }
 
   render() {

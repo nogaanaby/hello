@@ -49,8 +49,8 @@ class Input extends Component {
     if(this.props.label === 'Title') {
       const originTitle = this.props.value
       const chosenTitle = value
-      if(originTitle !== chosenTitle && this.props.movieTitles.find((movieTitle)=> movieTitle.toLowerCase() === chosenTitle.toLowerCase())){
-        return 'This Title Already Exist'
+      if(originTitle !== chosenTitle){
+        return this.props.checkTitle(value)
       }
     }
     return false
