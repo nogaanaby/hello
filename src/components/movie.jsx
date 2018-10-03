@@ -5,7 +5,6 @@ class Movie extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      titleShortcut: this.maxCharPerLine(this.props.movie.Title)
     };
   }
 
@@ -17,27 +16,8 @@ class Movie extends Component {
       }
   }
 
-  addMovieExample = () => {
-    const example = {
-      Title: 'Title',
-      Year: 'Title',
-      Director:'Title',
-      Runtime:'Title',
-      Genre:'Title'
-    }
-    this.setState({movie: example})
-  }
-
   componentDidMount() {
 
-  }
-
-  maxCharPerLine = (text) => {
-    if(text.length > 12 && this.props.presentType === 'mini'){
-      return text.slice(0, 12) + '...'
-    } else {
-      return text
-    }
   }
 
   render() {
@@ -68,9 +48,8 @@ class Movie extends Component {
             </div>
           </div>
           <footer className="card-footer">
-            <a onClick={()=>this.props.onEdit(this.props.movie.Title)} className="card-footer-item">{this.props.editBText}</a>
-            <a onClick={()=>this.props.onDelete(this.props.movie.Title)} className="card-footer-item">{this.props.deleteBText}</a>
-            <a onClick={()=>this.props.onExpand(this.props.movie.Title)} className="card-footer-item">{this.props.expandBText}</a>
+            <a onClick={()=>this.props.onEdit(this.props.movie.Title)} className="card-footer-item"><i className="far fa-edit iconTurkiz"></i></a>
+            <a onClick={()=>this.props.onDelete(this.props.movie.Title)} className="card-footer-item"><i className="fas fa-trash-alt iconTurkiz"></i></a>
           </footer>
         </div>
       </div>

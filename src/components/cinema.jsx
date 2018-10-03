@@ -3,12 +3,11 @@ import Movie from './movie';
 import AddMovie from './addMovie';
 import addMovieIcon from '../addMovieIcon.png';
 import EditMovie from './editMovie';
-import Expand from './expandMovie';
+import LoadSpinner from './loadSpinner';
 import Popup from './popup';
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import { fetchMovie, deleteMovie, editMovie, fetchError } from '../actions/movieActions.js'
-import '../App.css';
 
 class Cinema extends Component {
   constructor() {
@@ -18,7 +17,7 @@ class Cinema extends Component {
       CinemaWidth: this.getCinemaWidth(),
       movieBoxWidth: this.getCinemaWidth()/ (Math.ceil(this.getCinemaWidth() / 400)),
       popup: 'non',
-      deleteMovieByTitle: ''
+      deleteMovieByTitle: '' 
     };
   }
 
@@ -56,6 +55,12 @@ class Cinema extends Component {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.calcMovieBoxWidth)
+  }
+
+  componentDidUpdate (prevProps) {
+    if(this.props.error !== prevProps.error || this.props.movies !== prevProps.movies) {
+      this.closePopup()
+    }
   }
 
   closePopup = () => {
@@ -112,28 +117,14 @@ class Cinema extends Component {
 
   addMovie = (title) => {
     this.props.fetchMovie(title)
-    if(this.props.error === '') {
-      this.closePopup()
+    this.setState({popup: 'spinner'})
+  }
+
+    /****************   spinner   *************/
+
+    activateSpinner = () => {
+      this.setState({popup: 'spinner'})
     }
-  }
-
-/****************   EXPAND MOVIE   *************/
-
-
-  handleExpand = (title) => {
-    this.setState({popup: title + '_expand'})
-  }
-
-  flipMovie = (id, direction) => {
-    const currentExpandedIndex = this.props.movies.findIndex((movie)=>movie.imdbID === id)
-    const nextMovie = this.props.movies[currentExpandedIndex+1]
-    const prevMovie = this.props.movies[currentExpandedIndex-1]
-    if (direction === 'next' && currentExpandedIndex !== this.props.movies.length-1) {
-      this.setState({popup: nextMovie.Title + '_expand'})
-    } else if(direction === 'prev' && currentExpandedIndex !== 0) {
-      this.setState({popup: prevMovie.Title + '_expand'})
-    }
-  }
 
   render() {
     return (
@@ -146,24 +137,13 @@ class Cinema extends Component {
                 movieBoxWidth={this.state.movieBoxWidth}
                 movie={movie}
                 onDelete={this.confirmDelete}
-                onEdit={this.handleEdit}
-                onExpand={this.handleExpand}
-                presentType="mini"
-                editBText={<i className="far fa-edit iconTurkiz"></i>}
-                expandBText={<i className="fas fa-expand iconTurkiz"></i>}
-                deleteBText={<i className="fas fa-trash-alt iconTurkiz"></i>}/>
+                onEdit={this.handleEdit}/>
                 <EditMovie
                 movie={movie}
                 active={this.state.popup === movie.Title + '_edit'}
                 onClose={this.closePopup}
                 onSubmit={this.handleEditSubmit}
                 movieTitles={this.state.movieTitles}/>
-                <Expand
-                movie={movie}
-                active={this.state.popup === movie.Title + '_expand'}
-                onClose={this.closePopup}
-                onFlipMovie={this.flipMovie}
-                />
               </div>
             })
           }
@@ -187,6 +167,8 @@ class Cinema extends Component {
           onAddMovie={this.addMovie}
           onClose={this.closePopup}
         />
+        <LoadSpinner
+          active={this.state.popup === 'spinner'}/>
       </div>
     );
   }
