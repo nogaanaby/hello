@@ -13,7 +13,7 @@ class Cinema extends Component {
   constructor() {
     super();
     this.state = {
-      movieTitles: [ 'inception', 'lala', 'v for vendetta', 'sisters', 'The Great Gatsby', 'The Visit'],
+      movieTitles: [ 'inception', 'dog day afternoon', 'v for vendetta', 'sisters', 'The Great Gatsby', 'The Visit'],
       CinemaWidth: this.getCinemaWidth(),
       movieBoxWidth: this.getCinemaWidth()/ (Math.ceil(this.getCinemaWidth() / 400)),
       popup: 'non',

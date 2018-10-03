@@ -1,0 +1,179 @@
+
+.icon-block .fa-3dicon{
+	/*transform-style*/
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	/*perspective*/
+	-webkit-perspective: 1000px;
+	-moz-perspective: 1000px;
+	-ms-perspective: 1000px;
+	-o-perspective: 1000px;
+	perspective: 1000px;
+	/*Webkit*/
+	-webkit-animation-name: rotate;
+	-webkit-animation-duration:30s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count:infinite; 
+	 -webkit-animation-fill-mode:both; 
+	 /*mozilla*/
+	-moz-animation-name: rotate;
+	-moz-animation-duration:30s;
+	-moz-animation-timing-function: linear;
+	-moz-animation-iteration-count:infinite; 
+	-moz-animation-fill-mode:both; 
+	 /*Opera*/
+	-o-animation-name: rotate;
+	-o-animation-duration:30s;
+	-o-animation-timing-function: linear;
+	-o-animation-iteration-count:infinite; 
+	-o-animation-fill-mode:both; 
+	 /*IE 10*/
+	-ms-animation-name: rotate;
+	-ms-animation-duration:30s;
+	-ms-animation-timing-function: linear;
+	-ms-animation-iteration-count:infinite; 
+	-ms-animation-fill-mode:both; 
+	
+	 /*Default*/
+	animation-name: rotate;
+	animation-duration:30s;
+	animation-timing-function: linear;
+	animation-iteration-count:infinite; 
+	animation-fill-mode:both; 
+	color:#00ADC1;
+}
+
+
+@-webkit-keyframes rotate {
+ 	0% {
+		 text-shadow: 1px 1px 1px #00454d;
+		 -webkit-transform: rotateY(0deg); 
+	} 
+ 
+	25% {
+		  text-shadow: 1px 1px 1px #00454d, -2px 1px 1px #00454d, -3px 1px 1px #00454d, -4px 1px 1px #00454d,-4px 1px 1px #00454d,
+		 -5px 1px 1px #00454d,-6px 1px 1px #00454d,-7px 1px 1px #00454d,-8px 1px 1px #00454d,-9px 1px 1px #00454d,-10px 1px 1px #00454d,
+		 -11px 1px 1px #00454d,-12px 1px 1px #00454d,-13px 1px 1px #00454d,-14px 1px 1px #00454d,-15px 1px 1px #00454d,-16px 1px 1px #00454d,
+		 -17px 1px 1px #00454d,-18px 1px 1px #00454d,-19px 1px 1px #00454d,-20px 1px 1px #00454d; 
+		 -webkit-transform: rotateY(40deg); 
+	}
+	50% {
+		 text-shadow: 0px 0px 0px #00454d;
+		 -webkit-transform: rotateY(0deg); 
+	} 
+ 
+	75% {
+		  text-shadow: 1px 1px 1px #00454d, 2px 1px 1px #00454d, 3px 1px 1px #00454d, 4px 1px 1px #00454d,4px 1px 1px #00454d,
+		 5px 1px 1px #00454d,6px 1px 1px #00454d,7px 1px 1px #00454d,8px 1px 1px #00454d,9px 1px 1px #00454d,10px 1px 1px #00454d,
+		 11px 1px 1px #00454d,12px 1px 1px #00454d,13px 1px 1px #00454d,14px 1px 1px #00454d,15px 1px 1px #00454d,16px 1px 1px #00454d,
+		 17px 1px 1px #00454d,18px 1px 1px #00454d,19px 1px 1px #00454d,20px 1px 1px #00454d; 
+		 -webkit-transform: rotateY(-40deg); 
+	}
+	100% {
+		 text-shadow: 1px 1px 1px #00454d;
+		 -webkit-transform: rotateY(0deg); 
+	} 
+}
+
+
+@-moz-keyframes rotate {
+ 	0% {
+		 text-shadow: 1px 1px 1px #00454d;
+		 -moz-transform: rotateY(0deg); 
+	} 
+ 
+	25% {
+		  text-shadow: 1px 1px 1px #00454d, -2px 1px 1px #00454d, -3px 1px 1px #00454d, -4px 1px 1px #00454d,-4px 1px 1px #00454d,
+		 -5px 1px 1px #00454d,-6px 1px 1px #00454d,-7px 1px 1px #00454d,-8px 1px 1px #00454d,-9px 1px 1px #00454d,-10px 1px 1px #00454d,
+		 -11px 1px 1px #00454d,-12px 1px 1px #00454d,-13px 1px 1px #00454d,-14px 1px 1px #00454d,-15px 1px 1px #00454d,-16px 1px 1px #00454d,
+		 -17px 1px 1px #00454d,-18px 1px 1px #00454d,-19px 1px 1px #00454d,-20px 1px 1px #00454d; 
+		 -moz-transform: rotateY(40deg); 
+	}
+	50% {
+		 text-shadow: 0px 0px 0px #00454d;
+		 -moz-transform: rotateY(0deg); 
+	} 
+ 
+	75% {
+		  text-shadow: 1px 1px 1px #00454d, 2px 1px 1px #00454d, 3px 1px 1px #00454d, 4px 1px 1px #00454d,4px 1px 1px #00454d,
+		 5px 1px 1px #00454d,6px 1px 1px #00454d,7px 1px 1px #00454d,8px 1px 1px #00454d,9px 1px 1px #00454d,10px 1px 1px #00454d,
+		 11px 1px 1px #00454d,12px 1px 1px #00454d,13px 1px 1px #00454d,14px 1px 1px #00454d,15px 1px 1px #00454d,16px 1px 1px #00454d,
+		 17px 1px 1px #00454d,18px 1px 1px #00454d,19px 1px 1px #00454d,20px 1px 1px #00454d; 
+		 -moz-transform: rotateY(-40deg); 
+	}
+	100% {
+		 text-shadow: 1px 1px 1px #00454d;
+		 -moz-transform: rotateY(0deg); 
+	} 
+}
+
+
+
+@-o-keyframes rotate {
+ 	0% {
+		 text-shadow: 1px 1px 1px #00454d;
+		 -o-transform: rotateY(0deg); 
+	} 
+ 
+	25% {
+		  text-shadow: 1px 1px 1px #00454d, -2px 1px 1px #00454d, -3px 1px 1px #00454d, -4px 1px 1px #00454d,-4px 1px 1px #00454d,
+		 -5px 1px 1px #00454d,-6px 1px 1px #00454d,-7px 1px 1px #00454d,-8px 1px 1px #00454d,-9px 1px 1px #00454d,-10px 1px 1px #00454d,
+		 -11px 1px 1px #00454d,-12px 1px 1px #00454d,-13px 1px 1px #00454d,-14px 1px 1px #00454d,-15px 1px 1px #00454d,-16px 1px 1px #00454d,
+		 -17px 1px 1px #00454d,-18px 1px 1px #00454d,-19px 1px 1px #00454d,-20px 1px 1px #00454d; 
+		 -o-transform: rotateY(40deg); 
+	}
+	50% {
+		 text-shadow: 0px 0px 0px #00454d;
+		 -o-transform: rotateY(0deg); 
+	} 
+ 
+	75% {
+		  text-shadow: 1px 1px 1px #00454d, 2px 1px 1px #00454d, 3px 1px 1px #00454d, 4px 1px 1px #00454d,4px 1px 1px #00454d,
+		 5px 1px 1px #00454d,6px 1px 1px #00454d,7px 1px 1px #00454d,8px 1px 1px #00454d,9px 1px 1px #00454d,10px 1px 1px #00454d,
+		 11px 1px 1px #00454d,12px 1px 1px #00454d,13px 1px 1px #00454d,14px 1px 1px #00454d,15px 1px 1px #00454d,16px 1px 1px #00454d,
+		 17px 1px 1px #00454d,18px 1px 1px #00454d,19px 1px 1px #00454d,20px 1px 1px #00454d; 
+		 -o-transform: rotateY(-40deg); 
+	}
+	100% {
+		 text-shadow: 1px 1px 1px #00454d;
+		 -o-transform: rotateY(0deg); 
+	} 
+}
+
+ 
+
+
+
+@keyframes rotate {
+ 	0% {
+		 text-shadow: 1px 1px 1px #00454d;
+		 transform: rotateY(0deg); 
+	} 
+ 
+	25% {
+		  text-shadow: 1px 1px 1px #00454d, -2px 1px 1px #00454d, -3px 1px 1px #00454d, -4px 1px 1px #00454d,-4px 1px 1px #00454d,
+		 -5px 1px 1px #00454d,-6px 1px 1px #00454d,-7px 1px 1px #00454d,-8px 1px 1px #00454d,-9px 1px 1px #00454d,-10px 1px 1px #00454d,
+		 -11px 1px 1px #00454d,-12px 1px 1px #00454d,-13px 1px 1px #00454d,-14px 1px 1px #00454d,-15px 1px 1px #00454d,-16px 1px 1px #00454d,
+		 -17px 1px 1px #00454d,-18px 1px 1px #00454d,-19px 1px 1px #00454d,-20px 1px 1px #00454d; 
+		 transform: rotateY(40deg); 
+	}
+	50% {
+		 text-shadow: 0px 0px 0px #00454d;
+		 transform: rotateY(0deg); 
+	} 
+ 
+	75% {
+		  text-shadow: 1px 1px 1px #00454d, 2px 1px 1px #00454d, 3px 1px 1px #00454d, 4px 1px 1px #00454d,4px 1px 1px #00454d,
+		 5px 1px 1px #00454d,6px 1px 1px #00454d,7px 1px 1px #00454d,8px 1px 1px #00454d,9px 1px 1px #00454d,10px 1px 1px #00454d,
+		 11px 1px 1px #00454d,12px 1px 1px #00454d,13px 1px 1px #00454d,14px 1px 1px #00454d,15px 1px 1px #00454d,16px 1px 1px #00454d,
+		 17px 1px 1px #00454d,18px 1px 1px #00454d,19px 1px 1px #00454d,20px 1px 1px #00454d; 
+		 transform: rotateY(-40deg); 
+	}
+	100% {
+		 text-shadow: 1px 1px 1px #00454d;
+		 transform: rotateY(0deg); 
+	} 
+}

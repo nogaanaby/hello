@@ -6,17 +6,30 @@
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
+  color: #008a99;
 }
 
 .App-header {
-  background-color: #222;
   height: 150px;
   padding: 20px;
-  color: white;
 }
 
 .App-title {
-  font-size: 1.5em;
+  color: white;
+  font-weight: bold;
+  font-family: candara, sans-serif;
+}
+
+@media only screen and (max-width: 480px) {
+  .App-title {
+    font-size: 1.5em;
+  }
+}
+
+@media only screen and (min-width: 481px) {
+  .App-title {
+    font-size: 2em;
+  }
 }
 
 .App-intro {
@@ -24,8 +37,8 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from { transform: skewY(0deg); }
+  to { transform: skewY(20deg); }
 }
 .cinema, .movies{
   display: flex;
@@ -91,5 +104,5 @@ li.is-small{
 }
 
 .iconTurkiz:hover{
-  color:#008a99;
+  color:#00454d;
 }
